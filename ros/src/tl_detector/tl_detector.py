@@ -12,7 +12,7 @@ import cv2
 import yaml
 from scipy.spatial import KDTree
 
-STATE_COUNT_THRESHOLD = 3
+STATE_COUNT_THRESHOLD = 2
 
 
 class TLDetector(object):
@@ -58,7 +58,7 @@ class TLDetector(object):
         self.loop()
 
     def loop(self):
-        # set to 10Hz first
+        # set to 50Hz first
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
             if self.pose and self.waypoints and self.camera_image:

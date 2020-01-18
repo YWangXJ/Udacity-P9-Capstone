@@ -31,7 +31,7 @@ class TLClassifier(object):
 
         self.sess = tf.Session(graph=self.graph)
 
-    def final_class(self, class_id):
+    def final_state(self, class_id):
         if class_id == 1:
             return TrafficLight.GREEN
         elif class_id == 2:
@@ -65,7 +65,7 @@ class TLClassifier(object):
 
         # return corresponding light states
         if scores[0] > self.threshold and num_detections > 0:
-            return self.final_class(classes[0])
+            return self.final_state(classes[0])
 
         # return unknown if nothing detected
         return TrafficLight.UNKNOWN
