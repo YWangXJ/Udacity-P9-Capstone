@@ -58,13 +58,13 @@ class TLDetector(object):
         self.loop()
 
     def loop(self):
-        # set to 50Hz first
+        # set to 10Hz first
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
             if self.pose and self.waypoints and self.camera_image:
                 # process camera img
                 light_wp, cur_state = self.process_traffic_lights()
-                rospy.logwarn("closest_light_state: {0}".format(cur_state))
+
                 '''
                     Publish upcoming red lights at camera frequency.
                     Each predicted state has to occur `STATE_COUNT_THRESHOLD` number

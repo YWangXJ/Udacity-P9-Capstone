@@ -1,4 +1,4 @@
-import datetime
+import rospy
 from styx_msgs.msg import TrafficLight
 import tensorflow as tf
 import numpy as np
@@ -62,9 +62,12 @@ class TLClassifier(object):
         boxes = np.squeeze(boxes)
         scores = np.squeeze(scores)
         classes = np.squeeze(classes).astype(np.int32)
+        rospy.logwarn("classes: {0}".format(classes[0]))
+        rospy.logwarn("scores: {0}".format(scores[0]))
 
         # return corresponding light states
-        if scores[0] > self.threshold and num_detections > 0:
+        if scores[0] > self.threshold:
+
             return self.final_state(classes[0])
 
         # return unknown if nothing detected
