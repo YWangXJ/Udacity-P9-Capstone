@@ -8,9 +8,11 @@ class TLClassifier(object):
     def __init__(self, is_site):
         # load classifier according to is_site
         if is_site:
-            path = 'light_classification/model/Real/frozen_inference_graph.pb'
+            # path = 'light_classification/model/Real/frozen_inference_graph.pb'
+            path = 'light_classification/model/Real/ssd-real.pb'
         else:
-            path = 'light_classification/model/Sim/frozen_inference_graph.pb'
+            rospy.loginfo('Running Simulation')
+            path = 'light_classification/model/Sim/ssd-sim.pb'
 
         # initialize tf
         self.graph = tf.Graph()
