@@ -25,8 +25,8 @@ TODO (for Yousuf and Aaron): Stopline location for each traffic light.
 
 LOOKAHEAD_WPS = 200  # Number of waypoints we will publish. You can change this number
 MAX_DECEL = .5
-# MAX_VEL = 20  # Speed limit mph
-
+MAX_VEL = 10  # Speed limit mph
+ONE_MPH = 0.44704
 
 
 class WaypointUpdater(object):
@@ -47,7 +47,7 @@ class WaypointUpdater(object):
         self.waypoints_2d = None
         self.waypoint_tree = None
         self.stopline_wp_idx = -1
-        # self.max_vel = MAX_VEL * ONE_MPH  # mph to m/s
+        self.max_vel = MAX_VEL * ONE_MPH  # mph to m/s
 
         # self.driving = False  # bool to see if car need accelerate or decelerate
 
@@ -97,6 +97,7 @@ class WaypointUpdater(object):
 
         if self.stopline_wp_idx == -1 or (self.stopline_wp_idx >= farthest_idx):
             lane.waypoints = base_waypoints
+            # lane.waypoints =  self.accelerate_waypoints(base_waypoints, closest_idx)
         else:
             lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
 
@@ -108,15 +109,20 @@ class WaypointUpdater(object):
 
         return False
 
-    # def accelerate_waypoints(self, closest_idx, farthest_idx):
-    #     lane = self.base_lane.waypoints[closest_idx:farthest_idx]
-    #
-    #     for i in range(len(lane)):
-    #         vel = self.get_waypoint_velocity(lane, i)
-    #         vel = min(vel + (i+1) * 0.05, self.max_vel)
-    #         self.set_waypoint_velocity(lane, i, vel)
-    #
-    #     return lane
+    def accelerate_waypoints(self, waypoints, closest_idx):
+        # two waypoints back from line so front of the car is behind the stop line
+        temp_waypoints = []
+        for i, wp in enumerate(waypoints):
+            new_wp = Waypoint()
+            new_wp.pose = wp.pose
+
+            new_vel = self.get_waypoint_velocity(wp)
+            new_vel = min(new_vel + (i+1)*0.05, self.max_vel)
+            # self.set_waypoint_velocity(waypoints, i, new_vel)
+            new_wp.twist.twist.linear.x = new_vel
+            temp_waypoints.append(new_wp)
+
+        return temp_waypoints
 
     def decelerate_waypoints(self, waypoints, closest_idx):
         # two waypoints back from line so front of the car is behind the stop line
@@ -131,7 +137,7 @@ class WaypointUpdater(object):
             if vel < 1.0:
                 vel = 0.0
 
-            new_vel = min(vel, self.get_waypoint_velocity(wp))
+            new_vel = min(vel, self.get_waypoint_velocity(wp), self.max_vel)
 
             new_wp.twist.twist.linear.x = new_vel
             temp_waypoints.append(new_wp)
