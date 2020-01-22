@@ -64,8 +64,8 @@ class TLClassifier(object):
         boxes = np.squeeze(boxes)
         scores = np.squeeze(scores)
         classes = np.squeeze(classes).astype(np.int32)
-        rospy.logwarn("classes: {0}".format(classes[0]))
-        rospy.logwarn("scores: {0}".format(scores[0]))
+        # rospy.logwarn("classes: {0}".format(classes[0]))
+        # rospy.logwarn("scores: {0}".format(scores[0]))
 
         # return corresponding light states
         if scores[0] > self.threshold:
