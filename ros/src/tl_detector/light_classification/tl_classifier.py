@@ -12,7 +12,8 @@ class TLClassifier(object):
             path = 'light_classification/model/Real/ssd-real.pb'
         else:
             rospy.loginfo('Running Simulation')
-            path = 'light_classification/model/Sim/ssd-sim.pb'
+            # path = 'light_classification/model/Sim/ssd-sim.pb'
+            path = 'light_classification/model/Sim/frozen_inference_graph.pb'
 
         # initialize tf
         self.graph = tf.Graph()
@@ -64,8 +65,8 @@ class TLClassifier(object):
         boxes = np.squeeze(boxes)
         scores = np.squeeze(scores)
         classes = np.squeeze(classes).astype(np.int32)
-        # rospy.logwarn("classes: {0}".format(classes[0]))
-        # rospy.logwarn("scores: {0}".format(scores[0]))
+        rospy.logwarn("classes: {0}".format(classes[0]))
+        rospy.logwarn("scores: {0}".format(scores[0]))
 
         # return corresponding light states
         if scores[0] > self.threshold:
