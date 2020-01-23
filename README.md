@@ -1,11 +1,10 @@
-[//]: # (References)
-[Alex]https://github.com/alex-lechner/Traffic-Light-Classification
+
 
 ##Introduction
 
 This repository utilizes Robot Operating System (ROS) and Autoware libries and test in a Unity-based simuation environment. Functions includes computer vision to detect traffic light states, path planner to control vehicle's movement, and dbw_node to simulate the real vehicle's throttle, steering and brake. 
 
-The traffic light classification is based on the SSD Inception V2, which is well-discussed by [Alex][Alex]. The model was seperately trained for both simulation and realworld environment, which provides a great accuracy on the traffic light states.
+The traffic light classification is based on the SSD Inception V2, which is well-discussed by [Alex](https://github.com/alex-lechner/Traffic-Light-Classification). The model was seperately trained for both simulation and realworld environment, which provides a great accuracy on the traffic light states.
 
 ## Project Memeber
 Name|Email|GitHub|LinkedIn
