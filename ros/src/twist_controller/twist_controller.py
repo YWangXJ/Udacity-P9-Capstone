@@ -14,6 +14,7 @@ class Controller(object):
         # TODO: Implement
         self.yaw_controller = YawController(wheel_base, steer_ratio, 0.1, max_lat_accel, max_steer_angle)
 
+        #updated parameters to include for derivertive term
         kp = 0.1
         ki = 0.1
         kd = 0.1

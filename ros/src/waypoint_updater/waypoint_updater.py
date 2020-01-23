@@ -23,7 +23,7 @@ as well as to verify your TL classifier.
 TODO (for Yousuf and Aaron): Stopline location for each traffic light.
 '''
 
-LOOKAHEAD_WPS = 200  # Number of waypoints we will publish. You can change this number
+LOOKAHEAD_WPS = 100  # Number of waypoints we will publish. You can change this number
 MAX_DECEL = .5
 MAX_VEL = 10  # Speed limit mph
 ONE_MPH = 0.44704
@@ -96,7 +96,7 @@ class WaypointUpdater(object):
             self.stopline_wp_idx = -1
 
         if self.stopline_wp_idx == -1 or (self.stopline_wp_idx >= farthest_idx):
-            lane.waypoints = base_waypoints
+            lane.waypoints = base_waypoints #disable the accelerate function to avoid latency issues
             # lane.waypoints =  self.accelerate_waypoints(base_waypoints, closest_idx)
         else:
             lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)

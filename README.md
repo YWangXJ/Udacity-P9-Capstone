@@ -1,3 +1,18 @@
+[//]: # (References)
+[Alex]https://github.com/alex-lechner/Traffic-Light-Classification
+
+##Introduction
+
+This repository utilizes Robot Operating System (ROS) and Autoware libries and test in a Unity-based simuation environment. Functions includes computer vision to detect traffic light states, path planner to control vehicle's movement, and dbw_node to simulate the real vehicle's throttle, steering and brake. 
+
+The traffic light classification is based on the SSD Inception V2, which is well-discussed by [Alex][Alex]. The model was seperately trained for both simulation and realworld environment, which provides a great accuracy on the traffic light states.
+
+## Project Memeber
+Name|Email|GitHub|LinkedIn
+ -----------|---------------------------|-------------------------------|------------------------------------------------|
+ Yizhou Wang| wyzks123@gmail.com | https://github.com/YWangXJ| https://www.linkedin.com/in/yizhou-wang-1a551596/|
+
+## Setup Instructions
 This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
 
 Please use **one** of the two installation options, either native **or** docker installation.
